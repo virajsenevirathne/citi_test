@@ -12,14 +12,8 @@ export function isTestInProgress() {
   return inProgress;
 }
 
-export function confirmLeaveIfTestInProgress(): boolean {
-  if (!inProgress) return true;
-  const shouldLeave = window.confirm(
-    "You have a practice test in progress. Leave anyway? Your answers for this attempt will be lost."
-  );
-  if (shouldLeave) inProgress = false;
-  return shouldLeave;
-}
+const LEAVE_CONFIRM_MESSAGE =
+  "You have a practice test in progress. Leave anyway? Your answers for this attempt will be lost.";
 
 // Browser-Back guard: pushes one synthetic history entry (same URL, marked
 // state) so the first Back press pops it and fires popstate instead of
@@ -48,5 +42,34 @@ export function ensureHistoryGuardEntry() {
 export function consumeHistoryGuardEntryIfPresent() {
   if (hasGuardEntry()) {
     window.history.back();
+  }
+}
+
+/**
+ * Use for in-app navigation (Link clicks in BottomNav/Header) while a test
+ * may be in progress. If no test is in progress, `navigate` runs immediately.
+ * Otherwise the user is asked to confirm; if they do, the synthetic guard
+ * entry (if any) is consumed *first* and `navigate` only runs once that pop
+ * has actually completed — otherwise the destination would get pushed while
+ * still "on" the guard entry, leaving it stranded in history where a later
+ * Back press would land on the stale /practice-test route unexpectedly.
+ */
+export function guardedNavigate(navigate: () => void) {
+  if (!inProgress) {
+    navigate();
+    return;
+  }
+  const shouldLeave = window.confirm(LEAVE_CONFIRM_MESSAGE);
+  if (!shouldLeave) return;
+  inProgress = false;
+  if (hasGuardEntry()) {
+    const onPopState = () => {
+      window.removeEventListener("popstate", onPopState);
+      navigate();
+    };
+    window.addEventListener("popstate", onPopState);
+    window.history.back();
+  } else {
+    navigate();
   }
 }

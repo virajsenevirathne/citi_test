@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { confirmLeaveIfTestInProgress } from "@/lib/testGuard";
+import { useRouter } from "next/navigation";
+import { guardedNavigate, isTestInProgress } from "@/lib/testGuard";
 
 export default function Header() {
+  const router = useRouter();
+
   return (
     <header
       className="sticky top-0 z-40 border-b border-card-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80"
@@ -13,7 +16,9 @@ export default function Header() {
         <Link
           href="/"
           onClick={(e) => {
-            if (!confirmLeaveIfTestInProgress()) e.preventDefault();
+            if (!isTestInProgress()) return;
+            e.preventDefault();
+            guardedNavigate(() => router.push("/"));
           }}
           className="flex items-center gap-2 font-semibold text-primary active:scale-95 transition"
         >

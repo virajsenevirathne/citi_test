@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { confirmLeaveIfTestInProgress } from "@/lib/testGuard";
+import { usePathname, useRouter } from "next/navigation";
+import { guardedNavigate, isTestInProgress } from "@/lib/testGuard";
 
 const TABS = [
   { href: "/", label: "Home", icon: "🏠" },
@@ -12,6 +12,7 @@ const TABS = [
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <nav
@@ -30,7 +31,12 @@ export default function BottomNav() {
                 // Tapping the tab you're already on isn't a real navigation —
                 // don't prompt, and don't let the guard fire prematurely.
                 if (active) return;
-                if (!confirmLeaveIfTestInProgress()) e.preventDefault();
+                if (!isTestInProgress()) return;
+                // Take over navigation entirely: confirm, then (if leaving)
+                // consume the synthetic history-guard entry before pushing
+                // the destination, so none of it is left stranded in history.
+                e.preventDefault();
+                guardedNavigate(() => router.push(tab.href));
               }}
               className={`flex flex-1 flex-col items-center justify-center gap-0.5 py-2.5 text-xs font-medium transition active:scale-95 active:opacity-70 ${
                 active ? "text-primary" : "text-muted"
