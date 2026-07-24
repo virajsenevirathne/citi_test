@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f4ec;
+  --foreground: #16241d;
+  --card: #ffffff;
+  --card-border: #e2ddc9;
+  --primary: #00523a;
+  --primary-foreground: #ffffff;
+  --accent: #d9a400;
+  --accent-foreground: #16241d;
+  --muted: #6b7268;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-geist-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0e1712;
+    --foreground: #eef1ec;
+    --card: #16221c;
+    --card-border: #2a382f;
+    --primary: #3ea87c;
+    --primary-foreground: #08130d;
+    --accent: #f2c94c;
+    --accent-foreground: #16241d;
+    --muted: #9aa79e;
+  }
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.flip-card {
+  perspective: 1500px;
+}
+
+.flip-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .flip-card-inner {
+    transition: none !important;
+  }
+}
