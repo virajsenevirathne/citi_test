@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SupportButton from "@/components/SupportButton";
 import { allFlashcards, allQuestions, PARTS } from "@/content";
 
 export default function Home() {
@@ -71,6 +72,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <SupportButton />
     </div>
   );
 }
