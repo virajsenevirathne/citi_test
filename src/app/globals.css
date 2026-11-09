@@ -9,7 +9,7 @@
   --primary-foreground: #ffffff;
   --accent: #d9a400;
   --accent-foreground: #16241d;
-  --muted: #6b7268;
+  --muted: #565d54;
 }
 
 @theme inline {
@@ -25,9 +25,16 @@
   --font-sans: var(--font-geist-sans);
 }
 
+/* Theme: follows the system unless the user picks one (data-theme on <html>). */
+/* Short viewports (phones in landscape): keep chrome out of the way. */
+@custom-variant short (@media (max-height: 500px));
+@custom-variant tall (@media (min-height: 501px));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0e1712;
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+      --background: #0e1712;
     --foreground: #eef1ec;
     --card: #16221c;
     --card-border: #2a382f;
@@ -37,6 +44,28 @@
     --accent-foreground: #16241d;
     --muted: #9aa79e;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+    --background: #0e1712;
+  --foreground: #eef1ec;
+  --card: #16221c;
+  --card-border: #2a382f;
+  --primary: #3ea87c;
+  --primary-foreground: #08130d;
+  --accent: #f2c94c;
+  --accent-foreground: #16241d;
+  --muted: #9aa79e;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 html {

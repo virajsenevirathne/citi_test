@@ -1,64 +1,63 @@
 import Link from "next/link";
+import { CardsIcon, TargetIcon, TimerIcon } from "@/components/icons";
 import SupportButton from "@/components/SupportButton";
 import { allFlashcards, allQuestions, PARTS } from "@/content";
 
 export default function Home() {
   const partIds = Object.keys(PARTS) as (keyof typeof PARTS)[];
 
+  const cards = [
+    { href: "/flashcards", icon: CardsIcon, title: "Flashcards", text: "Flip through key facts by topic, mark what you know, and focus on what you don\u2019t.", cta: "Start studying →" },
+    { href: "/practice-test", icon: TargetIcon, title: "Practice", text: "20 questions with instant answers and explanations. No timer, just learn.", cta: "Start practice →" },
+    { href: "/practice-test", icon: TimerIcon, title: "Timed mock exam", text: "45 minutes, results at the end. Feels like the real thing.", cta: "Take a mock exam →" },
+  ];
+
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 space-y-10">
-      <section className="space-y-3 text-center">
-        <p className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+    <div className="mx-auto max-w-6xl space-y-12 px-4 py-8 md:py-12">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-[#0b3d2c] px-6 py-12 text-center text-primary-foreground shadow-lg sm:px-12 sm:py-16 dark:from-[#12301f] dark:to-[#0b1a12] dark:text-foreground">
+        <div aria-hidden className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-accent/20 blur-3xl" />
+        <p className="relative inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-semibold">
           Based on &ldquo;Australian Citizenship: Our Common Bond&rdquo;
         </p>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Prepare for the Australian Citizenship Test
+        <h1 className="relative mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
+          Prepare for the citizenship test
         </h1>
-        <p className="mx-auto max-w-xl text-muted">
-          {allFlashcards.length} flashcards and {allQuestions.length} practice questions covering
-          every part of the official testable content — including flags, symbols and other
-          image-based questions.
+        <p className="relative mx-auto mt-4 max-w-xl text-base opacity-90">
+          {allFlashcards.length} flashcards and {allQuestions.length} practice questions covering every
+          testable part, including flags, symbols and image-based questions. Free, fast and works offline.
         </p>
+        <div className="relative mt-8 flex flex-wrap justify-center gap-3">
+          <Link href="/practice-test" className="rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground shadow transition hover:brightness-105 active:scale-95">
+            Take a practice test
+          </Link>
+          <Link href="/flashcards" className="rounded-xl border border-white/40 px-6 py-3 text-sm font-semibold transition hover:bg-white/10 active:scale-95">
+            Study flashcards
+          </Link>
+        </div>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-2">
-        <Link
-          href="/flashcards"
-          className="group rounded-3xl border border-card-border bg-card p-6 shadow-sm transition active:scale-[0.98] active:shadow-none hover:shadow-md hover:border-primary"
-        >
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-3xl">🗂️</div>
-          <h2 className="mt-3 text-xl font-semibold">Flashcards</h2>
-          <p className="mt-1 text-sm text-muted">
-            Flip through key facts by topic, mark what you know, and focus on what you don&rsquo;t.
-          </p>
-          <span className="mt-4 inline-block text-sm font-medium text-primary">
-            Start studying →
-          </span>
-        </Link>
-
-        <Link
-          href="/practice-test"
-          className="group rounded-3xl border border-card-border bg-card p-6 shadow-sm transition active:scale-[0.98] active:shadow-none hover:shadow-md hover:border-primary"
-        >
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-3xl">📝</div>
-          <h2 className="mt-3 text-xl font-semibold">Practice Test</h2>
-          <p className="mt-1 text-sm text-muted">
-            20 randomly selected questions, including 5 on Australian values — just like the
-            real test.
-          </p>
-          <span className="mt-4 inline-block text-sm font-medium text-primary">
-            Start a test →
-          </span>
-        </Link>
+      <section className="grid gap-4 md:grid-cols-3">
+        {cards.map(({ icon: CardIcon, ...c }) => (
+          <Link
+            key={c.title}
+            href={c.href}
+            className="group rounded-2xl border border-card-border bg-card p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md active:scale-[0.98]"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary"><CardIcon size={26} /></div>
+            <h2 className="mt-3 text-lg font-semibold">{c.title}</h2>
+            <p className="mt-1 text-sm text-muted">{c.text}</p>
+            <span className="mt-4 inline-block text-sm font-medium text-primary">{c.cta}</span>
+          </Link>
+        ))}
       </section>
 
       <section className="rounded-2xl border border-card-border bg-card p-6">
         <h2 className="text-lg font-semibold">How the real test works</h2>
-        <ul className="mt-3 space-y-2 text-sm text-muted list-disc list-inside">
-          <li>The test is computer-based, multiple choice, and in English.</li>
-          <li>It consists of 20 randomly selected questions, including 5 questions on Australian values.</li>
-          <li>To pass, you must score at least 75% overall <strong className="text-foreground">and</strong> answer all 5 values questions correctly.</li>
-          <li>The test draws only on the official resource book, <em>Australian Citizenship: Our Common Bond</em>.</li>
+        <ul className="mt-3 list-inside list-disc space-y-2 text-sm text-muted">
+          <li>Computer-based, multiple choice, in English, 45 minutes.</li>
+          <li>20 randomly selected questions, including 5 on Australian values.</li>
+          <li>To pass: at least 75% overall <strong className="text-foreground">and</strong> all 5 values questions correct.</li>
+          <li>Questions come only from the official resource book, <em>Australian Citizenship: Our Common Bond</em>.</li>
         </ul>
       </section>
 

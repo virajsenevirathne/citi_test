@@ -15,24 +15,51 @@ export function isTestInProgress() {
 const LEAVE_CONFIRM_MESSAGE =
   "You have a practice test in progress. Leave anyway? Your answers for this attempt will be lost.";
 
+type LeaveOpener = (resolve: (leave: boolean) => void) => void;
+let leaveOpener: LeaveOpener | null = null;
+
+/** Registered by <LeaveDialog/>; lets the guard show an in-page dialog. */
+export function registerLeaveDialog(opener: LeaveOpener | null) {
+  leaveOpener = opener;
+}
+
+/** Asks the user whether to leave. Falls back to window.confirm if no dialog is mounted. */
+export function confirmLeave(): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (leaveOpener) leaveOpener(resolve);
+    else resolve(window.confirm(LEAVE_CONFIRM_MESSAGE));
+  });
+}
+
 // Browser-Back guard: pushes one synthetic history entry (same URL, marked
 // state) so the first Back press pops it and fires popstate instead of
 // immediately leaving. At most one of these ever exists at a time — repeated
 // test attempts reuse it rather than stacking — so a single history.back()
 // always fully and predictably leaves.
-interface GuardState {
-  acpTestGuard: true;
-}
+// Whether our synthetic history entry currently exists. Tracked with a module
+// flag rather than history.state because Next's router rewrites history.state
+// on its own (replaceState), which would silently erase any marker we put there.
+let guardActive = false;
 
 function hasGuardEntry(): boolean {
-  const state = window.history.state as GuardState | null;
-  return Boolean(state && state.acpTestGuard);
+  return guardActive;
 }
 
 export function ensureHistoryGuardEntry() {
-  if (!hasGuardEntry()) {
-    window.history.pushState({ acpTestGuard: true } satisfies GuardState, "");
+  if (!guardActive) {
+    window.history.pushState({ acpTestGuard: true }, "");
+    guardActive = true;
   }
+}
+
+/** Call from the popstate handler: the Back press just consumed the guard entry. */
+export function notifyGuardPopped() {
+  guardActive = false;
+}
+
+/** The guard entry is being unwound together with other entries (history.go(-n)). */
+export function forgetGuardEntry() {
+  guardActive = false;
 }
 
 // Silently consumes the guard entry (if we're currently sitting on one) via a
@@ -41,6 +68,7 @@ export function ensureHistoryGuardEntry() {
 // no-op press. Safe to call unconditionally after a test ends.
 export function consumeHistoryGuardEntryIfPresent() {
   if (hasGuardEntry()) {
+    guardActive = false;
     window.history.back();
   }
 }
@@ -59,17 +87,19 @@ export function guardedNavigate(navigate: () => void) {
     navigate();
     return;
   }
-  const shouldLeave = window.confirm(LEAVE_CONFIRM_MESSAGE);
-  if (!shouldLeave) return;
-  inProgress = false;
-  if (hasGuardEntry()) {
-    const onPopState = () => {
-      window.removeEventListener("popstate", onPopState);
+  void confirmLeave().then((shouldLeave) => {
+    if (!shouldLeave) return;
+    inProgress = false;
+    if (hasGuardEntry()) {
+      guardActive = false;
+      const onPopState = () => {
+        window.removeEventListener("popstate", onPopState);
+        navigate();
+      };
+      window.addEventListener("popstate", onPopState);
+      window.history.back();
+    } else {
       navigate();
-    };
-    window.addEventListener("popstate", onPopState);
-    window.history.back();
-  } else {
-    navigate();
-  }
+    }
+  });
 }

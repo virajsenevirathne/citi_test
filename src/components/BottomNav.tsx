@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { CardsIcon, HomeIcon, TargetIcon } from "@/components/icons";
 import { usePathname, useRouter } from "next/navigation";
 import { guardedNavigate, isTestInProgress } from "@/lib/testGuard";
 
 const TABS = [
-  { href: "/", label: "Home", icon: "🏠" },
-  { href: "/flashcards", label: "Flashcards", icon: "🗂️" },
-  { href: "/practice-test", label: "Practice", icon: "📝" },
+  { href: "/", label: "Home", icon: HomeIcon },
+  { href: "/flashcards", label: "Flashcards", icon: CardsIcon },
+  { href: "/practice-test", label: "Practice", icon: TargetIcon },
 ] as const;
 
 export default function BottomNav() {
@@ -16,7 +17,8 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-card-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80"
+      aria-label="Primary"
+      className="fixed inset-x-0 bottom-0 z-50 md:hidden border-t border-card-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <div className="mx-auto flex max-w-3xl items-stretch justify-around">
@@ -42,9 +44,7 @@ export default function BottomNav() {
                 active ? "text-primary" : "text-muted"
               }`}
             >
-              <span className={`text-xl leading-none ${active ? "scale-110" : ""}`} aria-hidden>
-                {tab.icon}
-              </span>
+              <tab.icon size={24} className={active ? "text-primary" : ""} />
               <span>{tab.label}</span>
             </Link>
           );
