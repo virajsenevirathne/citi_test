@@ -27,10 +27,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 sm:py-3">
         <Link href="/" onClick={(e) => nav(e, "/", pathname === "/")} className="flex min-h-11 items-center gap-3">
           <span aria-hidden className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-accent shadow-sm"><StarIcon size={18} /></span>
-          <span className="leading-tight">
-            <span className="block text-base font-bold tracking-tight">Citizenship Practice</span>
-            <span className="block text-xs text-muted">Our Common Bond · study tool</span>
-          </span>
+          <span className="text-base font-bold leading-tight tracking-tight sm:text-lg">Australian Citizenship Practice</span>
         </Link>
         <div className="flex items-center gap-2">
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
