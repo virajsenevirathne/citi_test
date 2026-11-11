@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -69,6 +70,7 @@ export default function RootLayout({
         <BottomNav />
         <LeaveDialog />
         <ServiceWorkerRegister />
+        <Analytics />
       </body>
     </html>
   );
