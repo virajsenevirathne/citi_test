@@ -5,7 +5,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
-import { DisclaimerBanner, DisclaimerFooter } from "@/components/Disclaimer";
+import { DisclaimerFooter } from "@/components/Disclaimer";
 import LeaveDialog from "@/components/LeaveDialog";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -93,7 +93,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col overscroll-y-none">
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground">Skip to content</a>
         <Header />
-        <DisclaimerBanner />
         <main id="main" className="flex-1">{children}</main>
         <DisclaimerFooter />
         <BottomNav />
