@@ -147,7 +147,10 @@ export default function FlashcardDeck() {
       <div className="space-y-3 md:space-y-4">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Flashcards</h1>
+            <h1 className="font-bold tracking-tight">
+              <span className="block text-xs font-semibold uppercase tracking-wider text-primary">Australian citizenship test</span>
+              <span className="block text-2xl sm:text-3xl">Flashcards</span>
+            </h1>
             <p className="mt-1 text-sm text-muted">
               <span className="font-semibold text-foreground">{knownCount}</span> of {allFlashcards.length} learned
             </p>

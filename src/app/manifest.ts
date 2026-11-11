@@ -4,9 +4,9 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Aussie Citizenship Prep",
+    name: "Citizenship Practice — Australian Citizenship Test",
     short_name: "Citizenship Prep",
-    description: "Flashcards and practice tests for the Australian citizenship test, based on Our Common Bond.",
+    description: "Free Australian citizenship practice test and flashcards, based on Our Common Bond.",
     start_url: "/",
     display: "standalone",
     background_color: "#f5f3ea",

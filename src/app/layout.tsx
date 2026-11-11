@@ -8,6 +8,7 @@ import BottomNav from "@/components/BottomNav";
 import { DisclaimerBanner, DisclaimerFooter } from "@/components/Disclaimer";
 import LeaveDialog from "@/components/LeaveDialog";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +16,35 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Aussie Citizenship Prep",
-  description:
-    "Free flashcards and practice tests for the Australian citizenship test, covering all four testable parts of Our Common Bond.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: DEFAULT_TITLE, template: `%s | ${SITE_NAME}` },
+  description: DEFAULT_DESCRIPTION,
+  keywords: KEYWORDS,
+  applicationName: SITE_NAME,
+  category: "education",
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_AU",
+    url: "/",
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel to verify in Google Search Console.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
@@ -50,7 +77,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-AU"
       className={`${geistSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
