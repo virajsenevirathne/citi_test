@@ -14,6 +14,7 @@ function resolveSiteUrl() {
 export const SITE_URL = resolveSiteUrl();
 export const SITE_NAME = "Citizenship Practice";
 export const YEAR = new Date().getFullYear();
+export const SUPPORT_URL = "https://www.buymeacoffee.com/getaussieready";
 
 export const DEFAULT_TITLE = `Free Australian Citizenship Practice Test ${YEAR} | 145 Questions & Flashcards`;
 export const DEFAULT_DESCRIPTION =

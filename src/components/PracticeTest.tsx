@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { allQuestions, PARTS } from "@/content";
 import { CheckIcon, FlagIcon, TargetIcon, TimerIcon } from "@/components/icons";
+import { SUPPORT_URL } from "@/lib/site";
 import { buildPracticeTest, scoreTest, withShuffledOptions, type ShuffledQuestion } from "@/lib/quiz";
 import {
   addTestHistory,
@@ -522,6 +523,21 @@ export default function PracticeTest() {
         <strong>Practice result only.</strong> This is not the official citizenship test and does not predict your real result.
       </p>
 
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-card-border bg-card px-5 py-4 text-center sm:flex-row sm:justify-between sm:text-left">
+        <p className="text-sm text-muted">
+          {result?.passed ? "Nice work! " : ""}This site is free, with no ads or sign-up. If it&rsquo;s helping you
+          prepare, you can help keep it running.
+        </p>
+        <a
+          href={SUPPORT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-xl bg-[#FFDD00] px-4 text-sm font-semibold text-black shadow-sm transition hover:brightness-95 active:scale-95"
+        >
+          <span aria-hidden>☕</span> Buy me a coffee
+        </a>
+      </div>
+
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <h2 className="text-lg font-semibold">Review your answers</h2>
@@ -529,9 +545,9 @@ export default function PracticeTest() {
             <button
               onClick={() => setWrongOnly((v) => !v)}
               aria-pressed={wrongOnly}
-              className="min-h-11 rounded-full border border-card-border bg-card px-4 text-sm font-medium transition hover:border-primary"
+              className="min-h-11 shrink-0 whitespace-nowrap rounded-full border border-card-border bg-card px-4 text-sm font-medium transition hover:border-primary"
             >
-              {wrongOnly ? `Showing ${wrong} to revisit · show all` : "Show only ones to revisit"}
+              {wrongOnly ? `Show all ${questions.length}` : `Only ${wrong} to revisit`}
             </button>
           )}
         </div>

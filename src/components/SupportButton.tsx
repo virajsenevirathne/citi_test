@@ -1,4 +1,5 @@
 import { Cookie } from "next/font/google";
+import { SUPPORT_URL } from "@/lib/site";
 
 const cookie = Cookie({ weight: "400", subsets: ["latin"] });
 
@@ -12,7 +13,7 @@ export default function SupportButton() {
         Finding this free app useful? Help keep it running.
       </p>
       <a
-        href="https://www.buymeacoffee.com/getaussieready"
+        href={SUPPORT_URL}
         target="_blank"
         rel="noopener noreferrer"
         className={`${cookie.className} inline-flex items-center justify-center rounded-lg border-2 border-black bg-[#FFDD00] px-6 py-2 text-2xl leading-tight text-black shadow-sm transition active:scale-95 hover:brightness-95`}
