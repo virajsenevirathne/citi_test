@@ -1,3 +1,5 @@
+import { allFlashcards, allQuestions } from "@/content";
+
 // Single source of truth for SEO: the canonical origin, names and copy.
 //
 // SITE_URL resolves, in order: an explicit NEXT_PUBLIC_SITE_URL, then Vercel's
@@ -16,9 +18,12 @@ export const SITE_NAME = "Citizenship Practice";
 export const YEAR = new Date().getFullYear();
 export const SUPPORT_URL = "https://www.buymeacoffee.com/getaussieready";
 
-export const DEFAULT_TITLE = `Free Australian Citizenship Practice Test ${YEAR} | 145 Questions & Flashcards`;
+const QUESTION_COUNT = allQuestions.length;
+const FLASHCARD_COUNT = allFlashcards.length;
+
+export const DEFAULT_TITLE = `Free Australian Citizenship Practice Test ${YEAR} | ${QUESTION_COUNT} Questions & Flashcards`;
 export const DEFAULT_DESCRIPTION =
-  "Free Australian citizenship practice test with 145 questions and 68 flashcards based on Our Common Bond. Practise with instant answers or take a timed 20-question mock exam, including the 5 Australian values questions.";
+  `Free Australian citizenship practice test with ${QUESTION_COUNT} questions and ${FLASHCARD_COUNT} flashcards based on Our Common Bond. Practise with instant answers or take a timed 20-question mock exam, including the 5 Australian values questions.`;
 
 export const KEYWORDS = [
   "Australian citizenship practice test",

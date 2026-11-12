@@ -17,6 +17,9 @@ export const part2Flashcards: Flashcard[] = [
   { id: "p2-f12", part, topic: "Privileges", front: "Name key privileges of Australian citizenship.", back: "Apply for jobs in the Australian Public Service and Defence Force; seek election to parliament; apply for an Australian passport and re-enter freely; seek consular assistance overseas; and apply for children born overseas to become citizens by descent." },
   { id: "p2-f13", part, topic: "Privileges", front: "What consular help can Australians ask for while overseas?", back: "Help in emergencies such as civil unrest or natural disasters, an emergency passport, and general advice and support from Australian officials." },
   { id: "p2-f14", part, topic: "Participating", front: "How can Australians actively participate in society?", back: "Joining community, arts or cultural organisations; volunteering; participating in political life; and by working and paying tax." },
+  { id: "p2-f15", part, topic: "Responsibilities", front: "Is voting compulsory at every level of government?", back: "Voting is compulsory in federal and state or territory elections, and in a referendum. It may not be compulsory in local government elections in some states." },
+  { id: "p2-f16", part, topic: "Freedom of religion", front: "What is Australia's religious heritage, and what does a secular government mean?", back: "Australia has a Judaeo-Christian heritage, with public holidays on Good Friday, Easter Sunday and Christmas Day. The government is secular: it operates separately from religious entities, and there is no official religion." },
+  { id: "p2-f17", part, topic: "Participating in society", front: "Who collects tax, and what does it pay for?", back: "The Australian Taxation Office (ATO). Taxes pay for services such as government-funded healthcare and education, defence, roads and railways, and social security." },
 ];
 
 export const part2Questions: Question[] = [
@@ -306,5 +309,54 @@ export const part2Questions: Question[] = [
     ],
     answerIndex: 0,
     explanation: "There are laws ensuring people are not treated differently because of gender, race, disability or age.",
+  },
+  {
+    id: "p2-q27", part, topic: "Responsibilities",
+    question: "Is voting compulsory in local government elections?",
+    options: ["It may not be compulsory in some states", "Yes, in every state and territory", "No, local elections are not allowed", "Only property owners may vote in them"],
+    answerIndex: 0,
+    explanation: "Voting is compulsory in federal and state or territory elections. It may not be compulsory to vote in local government elections in some states.",
+  },
+  {
+    id: "p2-q28", part, topic: "Freedom of religion",
+    question: "What religious heritage does Australia have?",
+    options: ["A Judaeo-Christian heritage", "A Buddhist heritage", "An Islamic heritage", "No religious heritage"],
+    answerIndex: 0,
+    explanation: "Australia has a Judaeo-Christian heritage, and many Australians describe themselves as Christians, but there are people in Australia from all the large religions.",
+  },
+  {
+    id: "p2-q29", part, topic: "Freedom of religion",
+    question: "Which of these public holidays falls on a Christian day?",
+    options: ["Christmas Day", "Anzac Day", "Australia Day", "New Year's Day"],
+    answerIndex: 0,
+    explanation: "Australia has public holidays on Christian days such as Good Friday, Easter Sunday and Christmas Day.",
+  },
+  {
+    id: "p2-q30", part, topic: "Freedom of religion",
+    question: "What does it mean that the government in Australia is 'secular'?",
+    options: ["It operates separately from churches and other religious entities", "It is run by religious leaders", "It follows one official religion", "It bans all religions"],
+    answerIndex: 0,
+    explanation: "The government in Australia is secular, which means it operates separately from churches or other religious entities. Australia has no official national religion.",
+  },
+  {
+    id: "p2-q31", part, topic: "Privileges",
+    question: "When you are in another country as an Australian citizen, whose laws must you obey?",
+    options: ["The laws of that country", "Only Australian laws", "No laws, because you are a visitor", "Only the laws you agree with"],
+    answerIndex: 0,
+    explanation: "When in another country, you must obey the laws of that country.",
+  },
+  {
+    id: "p2-q32", part, topic: "Participating in society",
+    question: "Which agency collects tax in Australia?",
+    options: ["The Australian Taxation Office (ATO)", "Services Australia", "The Australian Electoral Commission", "The Reserve Bank of Australia"],
+    answerIndex: 0,
+    explanation: "Tax is paid out of the money you earn and is collected by the Australian Taxation Office (ATO).",
+  },
+  {
+    id: "p2-q33", part, topic: "Equality",
+    question: "The idea of a 'fair go' helps ensure what about Australian society?",
+    options: ["There are no formal class distinctions", "Everyone earns the same income", "Only citizens can own businesses", "Wealth decides success"],
+    answerIndex: 0,
+    explanation: "A 'fair go' means achievement should come from talents, work and effort rather than wealth or background. This is to ensure that there are no formal class distinctions in Australian society.",
   },
 ];

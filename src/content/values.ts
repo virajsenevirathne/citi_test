@@ -20,6 +20,9 @@ export const valuesFlashcards: Flashcard[] = [
   { id: "v-f15", part, topic: "Loyalty to Australia", front: "Can Australian citizens hold citizenship of another country too?", back: "Yes, this is dual or multiple citizenship — but citizens must always follow Australian law while in Australia, and some laws (e.g. against child sex tourism) apply even overseas." },
   { id: "v-f16", part, topic: "Loyalty to Australia", front: "What is an example of undermining Australia's interests and security?", back: "Sharing official government secrets on social media, or promoting distrust and fear of an ethnic community." },
   { id: "v-f17", part, topic: "Violence & family safety", front: "Is domestic or family violence accepted in Australia?", back: "No — it is against the law and unacceptable, whether the offender is a man or a woman. No one should accept being treated badly or harmed." },
+  { id: "v-f18", part, topic: "Freedom of religion", front: "Do religious laws have legal status in Australia?", back: "No. Australian law must be followed by everyone, even where it differs from religious laws. Polygamy and forced marriage are illegal and can result in imprisonment." },
+  { id: "v-f19", part, topic: "Freedom of speech", front: "What is not allowed under freedom of speech?", back: "Promoting violence against any person or group, making false allegations, and encouraging others to break the law. Newspapers, TV and radio share the same freedom of speech." },
+  { id: "v-f20", part, topic: "Our community", front: "What contribution is expected of everyone living in Australia?", back: "To participate in society and the community, and to try to support themselves and their families when they are able to do so." },
 ];
 
 export const valuesQuestions: Question[] = [
@@ -252,5 +255,68 @@ export const valuesQuestions: Question[] = [
     options: ["Listening to and respecting each other's views, even when different from your own", "Avoiding all contact with people who disagree", "Reporting disagreements to the police", "Ending the relationship or friendship"],
     answerIndex: 0,
     explanation: "Mutual respect and tolerance means listening to others and respecting their views, even where people disagree.",
+  },
+  {
+    id: "v-q31", part, topic: "Freedom of religion",
+    question: "Is forced marriage legal in Australia?",
+    options: ["No, it is against the law and can result in imprisonment", "Yes, if both families agree", "Yes, if it is part of a religious tradition", "Only if it happens overseas"],
+    answerIndex: 0,
+    explanation: "Some religious or cultural practices, such as polygamy and forced marriage, are against the law in Australia and can result in severe legal penalties, including imprisonment.",
+  },
+  {
+    id: "v-q32", part, topic: "Freedom of religion",
+    question: "Do religious laws have legal status in Australia?",
+    options: ["No, Australian law must be followed by everyone, even where it differs from religious law", "Yes, they override Australian law", "Yes, for members of that religion", "Only in some states"],
+    answerIndex: 0,
+    explanation: "Religious laws have no legal status in Australia. Australian law must be followed by everyone in Australia, including where it is different from religious laws.",
+  },
+  {
+    id: "v-q33", part, topic: "Freedom of speech",
+    question: "Under freedom of speech, which of these is illegal?",
+    options: ["Making false allegations or encouraging others to break the law", "Criticising the government", "Discussing ideas with others", "Peacefully protesting"],
+    answerIndex: 0,
+    explanation: "People can say and write what they think, but it is illegal to make false allegations or encourage others to break the law.",
+  },
+  {
+    id: "v-q34", part, topic: "Freedom of speech",
+    question: "Do newspapers, television and radio in Australia have freedom of speech?",
+    options: ["Yes, they have the same freedom as people", "No, the government approves all news", "Only government-owned outlets", "Only during elections"],
+    answerIndex: 0,
+    explanation: "People in Australia are free to say and write what they think. Newspapers, television and radio outlets have the same freedom.",
+  },
+  {
+    id: "v-q35", part, topic: "Our community",
+    question: "What responsibility does everyone in Australia have when they are able to?",
+    options: ["To try to support themselves and their families", "To join a political party", "To serve in the Defence Force", "To live in a capital city"],
+    answerIndex: 0,
+    explanation: "Australians expect everyone to participate in society and make a contribution. Everyone has a responsibility to try and support themselves and their families when they are able to do so.",
+  },
+  {
+    id: "v-q36", part, topic: "Mutual respect",
+    question: "Which kinds of violence are illegal in Australia?",
+    options: ["Violence of any kind, including verbal and physical abuse", "Only physical violence that causes injury", "Only violence in public places", "Only violence against children"],
+    answerIndex: 0,
+    explanation: "It is against the law to be violent towards another person. Violence of any kind, including verbal and physical abuse, is illegal.",
+  },
+  {
+    id: "v-q37", part, topic: "Equality",
+    question: "Can both men and women join the Australian Defence Force and the police force?",
+    options: ["Yes", "Only men", "Only women", "Only in some states"],
+    answerIndex: 0,
+    explanation: "Both men and women have equal access to education and employment, can vote, stand for parliament, join the Australian Defence Force and the police force, and are treated equally in courts.",
+  },
+  {
+    id: "v-q38", part, topic: "English language",
+    question: "What must applicants for Australian citizenship undertake if English is not their native language?",
+    options: ["To make reasonable efforts to learn English", "To pass a university English exam", "To stop using their first language", "Nothing at all"],
+    answerIndex: 0,
+    explanation: "Applicants for Australian citizenship must undertake to make reasonable efforts to learn the English language, if it is not their native language.",
+  },
+  {
+    id: "v-q39", part, topic: "Loyalty",
+    question: "Which of these would damage Australian community relations?",
+    options: ["Promoting distrust in and fear of an ethnic community", "Joining a cultural group", "Volunteering at a local event", "Learning a second language"],
+    answerIndex: 0,
+    explanation: "Australian society is based on shared obligations not to undermine Australia's interests and security. Promoting distrust in and fear of an ethnic community would damage Australian community relations.",
   },
 ];

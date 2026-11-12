@@ -1,4 +1,4 @@
-const CACHE_VERSION = "v3";
+const CACHE_VERSION = "v4";
 const CACHE_NAME = `acp-cache-${CACHE_VERSION}`;
 const CACHE_PREFIX = "acp-cache-";
 const MANIFEST_URL = "/precache-manifest.json";
