@@ -8,7 +8,9 @@ import BottomNav from "@/components/BottomNav";
 import { DisclaimerFooter } from "@/components/Disclaimer";
 import LeaveDialog from "@/components/LeaveDialog";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
-import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, KEYWORDS, SITE_NAME, SITE_SHORT_NAME, SITE_URL } from "@/lib/site";
+import { siteGraph } from "@/lib/schema";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Citizenship Prep",
+    title: SITE_SHORT_NAME,
   },
   icons: {
     icon: [
@@ -98,6 +100,7 @@ export default function RootLayout({
         <BottomNav />
         <LeaveDialog />
         <ServiceWorkerRegister />
+        <JsonLd data={siteGraph()} />
         <Analytics />
         <SpeedInsights />
       </body>

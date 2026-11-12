@@ -4,46 +4,78 @@ import SupportButton from "@/components/SupportButton";
 import JsonLd from "@/components/JsonLd";
 import { allFlashcards, allQuestions, PARTS, questionsByPart } from "@/content";
 import { FAQ } from "@/content/faq";
-import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { AUDIENCE, graph, ORGANIZATION_ID, WEBAPP_ID, webPage } from "@/lib/schema";
+import {
+  absoluteUrl,
+  CONTENT_LAST_UPDATED,
+  CONTENT_LAST_UPDATED_LABEL,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/site";
+import { PART_IDS, STUDY_INDEX_PATH, STUDY_PAGES, studyPath } from "@/lib/study";
 
 export default function Home() {
-  const partIds = Object.keys(PARTS) as (keyof typeof PARTS)[];
+  const partIds = PART_IDS;
   // One text-only sample question per part, shown with its answer (crawlable content).
   const samples = partIds
     .map((id) => questionsByPart[id].find((q) => !q.image))
     .filter((q): q is NonNullable<typeof q> => Boolean(q));
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
-        url: `${SITE_URL}/`,
-        name: SITE_NAME,
-        description: DEFAULT_DESCRIPTION,
-        inLanguage: "en-AU",
-      },
-      {
-        "@type": "LearningResource",
-        name: "Australian Citizenship Practice Test",
-        url: `${SITE_URL}/practice-test`,
-        learningResourceType: ["Practice test", "Flashcards"],
-        educationalLevel: "Beginner",
-        inLanguage: "en-AU",
-        isAccessibleForFree: true,
-        about: "Australian citizenship test (Australian Citizenship: Our Common Bond)",
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: FAQ.map(({ q, a }) => ({
-          "@type": "Question",
-          name: q,
-          acceptedAnswer: { "@type": "Answer", text: a },
-        })),
-      },
-    ],
-  };
+  const structuredData = graph(
+    webPage("/", DEFAULT_TITLE, DEFAULT_DESCRIPTION, {
+      about: { "@id": WEBAPP_ID },
+      mainEntity: { "@id": `${SITE_URL}/#faq` },
+    }),
+    {
+      "@type": "WebApplication",
+      "@id": WEBAPP_ID,
+      name: SITE_NAME,
+      url: absoluteUrl("/"),
+      description: DEFAULT_DESCRIPTION,
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript. Works offline after the first visit.",
+      inLanguage: "en-AU",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "AUD" },
+      audience: AUDIENCE,
+      publisher: { "@id": ORGANIZATION_ID },
+      dateModified: CONTENT_LAST_UPDATED,
+      featureList: [
+        `${allQuestions.length} practice questions with answers and explanations`,
+        `${allFlashcards.length} flashcards`,
+        "20-question practice test with 5 Australian values questions",
+        "Timed 45-minute mock exam",
+        "Works offline, no sign-up",
+      ],
+    },
+    {
+      "@type": "LearningResource",
+      "@id": `${SITE_URL}/#learning-resource`,
+      name: "Australian citizenship practice questions and flashcards",
+      url: absoluteUrl(STUDY_INDEX_PATH),
+      learningResourceType: ["Practice test", "Flashcards", "Questions and answers"],
+      educationalLevel: "Beginner",
+      inLanguage: "en-AU",
+      isAccessibleForFree: true,
+      audience: AUDIENCE,
+      provider: { "@id": ORGANIZATION_ID },
+      dateModified: CONTENT_LAST_UPDATED,
+      about: "Australian citizenship test (Australian Citizenship: Our Common Bond)",
+      hasPart: partIds.map((id) => ({ "@type": "LearningResource", name: STUDY_PAGES[id].name, url: absoluteUrl(studyPath(id)) })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: FAQ.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    },
+  );
 
   const cards = [
     { href: "/flashcards", icon: CardsIcon, title: "Flashcards", text: "Flip through key facts by topic, mark what you know, and focus on what you don\u2019t.", cta: "Start studying →" },
@@ -103,13 +135,26 @@ export default function Home() {
 
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">Testable content covered</h2>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <p className="text-sm text-muted">Read every practice question with its answer and explanation, part by part.</p>
+        <ul className="grid gap-3 sm:grid-cols-2">
           {partIds.map((id) => (
-            <div key={id} className="rounded-xl border border-card-border bg-card p-4">
-              <p className="font-medium">{PARTS[id].title}</p>
-            </div>
+            <li key={id}>
+              <Link
+                href={studyPath(id)}
+                className="group flex h-full items-center justify-between gap-3 rounded-xl border border-card-border bg-card p-4 transition hover:border-primary"
+              >
+                <span>
+                  <span className="block font-medium">{PARTS[id].title}</span>
+                  <span className="mt-0.5 block text-sm text-muted">{questionsByPart[id].length} questions with answers</span>
+                </span>
+                <span aria-hidden className="text-primary transition group-hover:translate-x-0.5">&rarr;</span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
+        <Link href={STUDY_INDEX_PATH} className="inline-block text-sm font-medium text-primary">
+          All questions and answers →
+        </Link>
       </section>
 
       <section className="space-y-3" aria-labelledby="samples-heading">
@@ -148,6 +193,19 @@ export default function Home() {
             </details>
           ))}
         </div>
+      </section>
+
+      <section aria-labelledby="about-heading" className="rounded-2xl border border-card-border bg-card p-6">
+        <h2 id="about-heading" className="text-lg font-semibold">About this site</h2>
+        <p className="mt-2 text-sm text-muted">
+          {SITE_NAME} is a free, independent study site for the Australian citizenship test. The questions and flashcards
+          were written from the official booklet, <em>Australian Citizenship: Our Common Bond</em>, and are not the real
+          test questions. Content last updated{" "}
+          <time dateTime={CONTENT_LAST_UPDATED}>{CONTENT_LAST_UPDATED_LABEL}</time>.
+        </p>
+        <Link href="/about" className="mt-3 inline-block text-sm font-medium text-primary">
+          More about this site →
+        </Link>
       </section>
 
       <SupportButton />

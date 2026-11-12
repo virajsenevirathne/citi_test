@@ -1,4 +1,8 @@
+import GuardedLink from "@/components/GuardedLink";
 import { SUPPORT_URL } from "@/lib/site";
+import { PART_IDS, STUDY_INDEX_PATH, STUDY_PAGES, studyPath } from "@/lib/study";
+
+const linkClass = "inline-flex min-h-11 items-center px-1.5 underline-offset-4 hover:text-foreground hover:underline";
 
 export function DisclaimerFooter() {
   return (
@@ -8,7 +12,16 @@ export function DisclaimerFooter() {
         Government or the Department of Home Affairs, and the real test questions will differ. For the full study
         material, see the official <em>Australian Citizenship: Our Common Bond</em> booklet.
       </p>
-      <p className="mt-3">
+      <nav aria-label="Footer" className="mx-auto mt-3 max-w-3xl">
+        <ul className="flex flex-wrap justify-center gap-x-2">
+          <li><GuardedLink href={STUDY_INDEX_PATH} className={linkClass}>Questions &amp; answers</GuardedLink></li>
+          {PART_IDS.map((id) => (
+            <li key={id}><GuardedLink href={studyPath(id)} className={linkClass}>{STUDY_PAGES[id].name}</GuardedLink></li>
+          ))}
+          <li><GuardedLink href="/about" className={linkClass}>About</GuardedLink></li>
+        </ul>
+      </nav>
+      <p className="mt-1">
         <a
           href={SUPPORT_URL}
           target="_blank"

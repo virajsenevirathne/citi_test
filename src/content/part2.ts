@@ -19,7 +19,7 @@ export const part2Flashcards: Flashcard[] = [
   { id: "p2-f14", part, topic: "Participating", front: "How can Australians actively participate in society?", back: "Joining community, arts or cultural organisations; volunteering; participating in political life; and by working and paying tax." },
   { id: "p2-f15", part, topic: "Responsibilities", front: "Is voting compulsory at every level of government?", back: "Voting is compulsory in federal and state or territory elections, and in a referendum. It may not be compulsory in local government elections in some states." },
   { id: "p2-f16", part, topic: "Freedom of religion", front: "What is Australia's religious heritage, and what does a secular government mean?", back: "Australia has a Judaeo-Christian heritage, with public holidays on Good Friday, Easter Sunday and Christmas Day. The government is secular: it operates separately from religious entities, and there is no official religion." },
-  { id: "p2-f17", part, topic: "Participating in society", front: "Who collects tax, and what does it pay for?", back: "The Australian Taxation Office (ATO). Taxes pay for services such as government-funded healthcare and education, defence, roads and railways, and social security." },
+  { id: "p2-f17", part, topic: "Participating", front: "Who collects tax, and what does it pay for?", back: "The Australian Taxation Office (ATO). Taxes pay for services such as government-funded healthcare and education, defence, roads and railways, and social security." },
 ];
 
 export const part2Questions: Question[] = [
@@ -346,14 +346,14 @@ export const part2Questions: Question[] = [
     explanation: "When in another country, you must obey the laws of that country.",
   },
   {
-    id: "p2-q32", part, topic: "Participating in society",
+    id: "p2-q32", part, topic: "Participating",
     question: "Which agency collects tax in Australia?",
     options: ["The Australian Taxation Office (ATO)", "Services Australia", "The Australian Electoral Commission", "The Reserve Bank of Australia"],
     answerIndex: 0,
     explanation: "Tax is paid out of the money you earn and is collected by the Australian Taxation Office (ATO).",
   },
   {
-    id: "p2-q33", part, topic: "Equality",
+    id: "p2-q33", part, topic: "Equalities",
     question: "The idea of a 'fair go' helps ensure what about Australian society?",
     options: ["There are no formal class distinctions", "Everyone earns the same income", "Only citizens can own businesses", "Wealth decides success"],
     answerIndex: 0,

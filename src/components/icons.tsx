@@ -30,6 +30,9 @@ export const HomeIcon = (p: IconProps) => (
 export const CardsIcon = (p: IconProps) => (
   <Icon {...p}><rect x="3" y="6" width="14" height="14" rx="2" /><path d="M7 6V5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2h-2" /></Icon>
 );
+export const BookIcon = (p: IconProps) => (
+  <Icon {...p}><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5z" /><path d="M4 19a2 2 0 012-2h13v4H6a2 2 0 01-2-2z" /><path d="M9 7h6" /><path d="M9 11h4" /></Icon>
+);
 export const TargetIcon = (p: IconProps) => (
   <Icon {...p}><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1" /></Icon>
 );

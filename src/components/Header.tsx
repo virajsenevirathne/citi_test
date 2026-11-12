@@ -9,7 +9,9 @@ import { guardedNavigate, isTestInProgress } from "@/lib/testGuard";
 const LINKS = [
   { href: "/", label: "Home" },
   { href: "/flashcards", label: "Flashcards" },
-  { href: "/practice-test", label: "Practice & mock exam" },
+  // Shorter label between md and lg so the nav fits beside the site name.
+  { href: "/practice-test", label: "Practice & mock exam", short: "Practice" },
+  { href: "/questions", label: "Q&A" },
 ] as const;
 
 export default function Header() {
@@ -39,11 +41,18 @@ export default function Header() {
                 href={l.href}
                 aria-current={active ? "page" : undefined}
                 onClick={(e) => nav(e, l.href, active)}
-                className={`rounded-lg px-3 py-2 text-sm font-medium transition ${
+                className={`whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition ${
                   active ? "bg-primary/15 font-semibold text-primary underline decoration-2 underline-offset-8" : "text-muted hover:bg-primary/5 hover:text-foreground"
                 }`}
               >
-                {l.label}
+                {"short" in l ? (
+                  <>
+                    <span className="lg:hidden">{l.short}</span>
+                    <span className="hidden lg:inline">{l.label}</span>
+                  </>
+                ) : (
+                  l.label
+                )}
               </Link>
             );
           })}

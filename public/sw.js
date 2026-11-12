@@ -1,4 +1,6 @@
-const CACHE_VERSION = "v4";
+// Bump when the set of precached routes changes, so installed clients re-run
+// install and precache the new pages.
+const CACHE_VERSION = "v5";
 const CACHE_NAME = `acp-cache-${CACHE_VERSION}`;
 const CACHE_PREFIX = "acp-cache-";
 const MANIFEST_URL = "/precache-manifest.json";
@@ -8,12 +10,14 @@ const MANIFEST_URL = "/precache-manifest.json";
 // manifest, written by scripts/generate-precache-manifest.mjs as part of
 // `npm run build`, additionally includes every hashed /_next/static/* chunk
 // and the route .txt (RSC payload) files, so a fresh install can serve
-// "/", "/flashcards" and "/practice-test" fully — HTML, JS and CSS — without
+// every page (home, practice test, flashcards, questions, about) fully — HTML, JS and CSS — without
 // ever having been visited online first.
 const FALLBACK_PRECACHE_URLS = [
   "/",
   "/flashcards",
   "/practice-test",
+  "/questions",
+  "/about",
   "/manifest.webmanifest",
   "/icons/icon-192.png",
   "/icons/icon-512.png",

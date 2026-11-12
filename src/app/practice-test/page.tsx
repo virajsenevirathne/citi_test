@@ -1,13 +1,34 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
 import PracticeTest from "@/components/PracticeTest";
-import { pageMetadata, YEAR } from "@/lib/site";
+import StudyLinks from "@/components/StudyLinks";
+import { breadcrumbList, graph, webPage } from "@/lib/schema";
+import { pageMetadata, QUESTION_COUNT, YEAR } from "@/lib/site";
 
-const title = `Australian Citizenship Practice Test ${YEAR} — 20 Questions & Timed Mock Exam`;
+const path = "/practice-test";
+const title = `Australian Citizenship Practice Test ${YEAR} & Mock Exam`;
 const description =
-  "Take a free Australian citizenship practice test: 20 random questions including 5 Australian values questions. Practise with instant answers or sit a 45-minute timed mock exam.";
+  "Free Australian citizenship practice test: 20 random questions including 5 values questions. Practise with instant answers or sit a 45-minute timed mock exam.";
 
-export const metadata: Metadata = pageMetadata(title, description, "/practice-test");
+export const metadata: Metadata = pageMetadata(title, description, path);
+
+const structuredData = graph(
+  webPage(path, title, description, {
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Practice test", path },
+    ]),
+  }),
+);
 
 export default function PracticeTestPage() {
-  return <PracticeTest />;
+  return (
+    <>
+      <PracticeTest />
+      <StudyLinks
+        intro={`Each practice test draws 20 questions at random from a pool of ${QUESTION_COUNT}. Prefer to read? Every question is listed with its answer and explanation, grouped by the four parts of Our Common Bond.`}
+      />
+      <JsonLd data={structuredData} />
+    </>
+  );
 }

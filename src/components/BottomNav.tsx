@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CardsIcon, HomeIcon, TargetIcon } from "@/components/icons";
+import { BookIcon, CardsIcon, HomeIcon, TargetIcon } from "@/components/icons";
 import { usePathname, useRouter } from "next/navigation";
 import { guardedNavigate, isTestInProgress } from "@/lib/testGuard";
 
@@ -9,6 +9,7 @@ const TABS = [
   { href: "/", label: "Home", icon: HomeIcon },
   { href: "/flashcards", label: "Flashcards", icon: CardsIcon },
   { href: "/practice-test", label: "Practice", icon: TargetIcon },
+  { href: "/questions", label: "Q&A", icon: BookIcon },
 ] as const;
 
 export default function BottomNav() {

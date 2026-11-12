@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CompassIcon } from "@/components/icons";
+
+// Next adds its own noindex for 404s; this also overrides the root layout's
+// "index, follow" so the 404 page does not carry conflicting robots tags.
+export const metadata: Metadata = {
+  title: "Page not found",
+  robots: { index: false, follow: true },
+  alternates: { canonical: null },
+};
 
 export default function NotFound() {
   return (

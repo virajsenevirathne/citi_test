@@ -292,14 +292,14 @@ export const valuesQuestions: Question[] = [
     explanation: "Australians expect everyone to participate in society and make a contribution. Everyone has a responsibility to try and support themselves and their families when they are able to do so.",
   },
   {
-    id: "v-q36", part, topic: "Mutual respect",
+    id: "v-q36", part, topic: "Mutual respect & tolerance",
     question: "Which kinds of violence are illegal in Australia?",
     options: ["Violence of any kind, including verbal and physical abuse", "Only physical violence that causes injury", "Only violence in public places", "Only violence against children"],
     answerIndex: 0,
     explanation: "It is against the law to be violent towards another person. Violence of any kind, including verbal and physical abuse, is illegal.",
   },
   {
-    id: "v-q37", part, topic: "Equality",
+    id: "v-q37", part, topic: "Equality under law",
     question: "Can both men and women join the Australian Defence Force and the police force?",
     options: ["Yes", "Only men", "Only women", "Only in some states"],
     answerIndex: 0,
@@ -313,7 +313,7 @@ export const valuesQuestions: Question[] = [
     explanation: "Applicants for Australian citizenship must undertake to make reasonable efforts to learn the English language, if it is not their native language.",
   },
   {
-    id: "v-q39", part, topic: "Loyalty",
+    id: "v-q39", part, topic: "Loyalty to Australia",
     question: "Which of these would damage Australian community relations?",
     options: ["Promoting distrust in and fear of an ethnic community", "Joining a cultural group", "Volunteering at a local event", "Learning a second language"],
     answerIndex: 0,

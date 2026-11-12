@@ -211,7 +211,7 @@ export default function PracticeTest() {
     return (
       <div className="mx-auto max-w-3xl space-y-8 px-4 py-8">
         <div className="space-y-2">
-          <h1 ref={headingRef} tabIndex={-1} className="text-3xl font-bold tracking-tight outline-none">Citizenship practice test</h1>
+          <h1 ref={headingRef} tabIndex={-1} className="text-3xl font-bold tracking-tight outline-none">Australian citizenship practice test</h1>
           <p className="text-muted">
             20 random questions, including exactly 5 on Australian values &mdash; the same structure as the real test.
             Drawn from a pool of {allQuestions.length}.
