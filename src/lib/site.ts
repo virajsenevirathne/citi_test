@@ -19,7 +19,7 @@ export const SITE_NAME = "Australian Citizenship Practice";
 // Home-screen icon label only; long names get truncated under the icon.
 export const SITE_SHORT_NAME = "Citizenship Prep";
 export const YEAR = new Date().getFullYear();
-export const SUPPORT_URL = "https://www.buymeacoffee.com/getaussieready";
+export const SUPPORT_URL = "https://buymeacoffee.com/builderviraj";
 // Official Department of Home Affairs page for the test and Our Common Bond.
 export const OFFICIAL_RESOURCE_URL = "https://immi.homeaffairs.gov.au/citizenship/test-and-interview/our-common-bond";
 
